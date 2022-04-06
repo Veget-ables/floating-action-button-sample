@@ -1,12 +1,8 @@
 package com.example.floating_action_button_sample.ui
 
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.updateTransition
-import androidx.compose.animation.scaleIn
-import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
@@ -39,7 +35,10 @@ fun DetailScreen(openCreate: () -> Unit) {
             ) {}
         },
         floatingActionButton = {
-            SpeedDialFloatingActionButton(openCreate)
+            SpeedDialFloatingActionButton(
+                onSubFab1Click = openCreate,
+                onSubFab2Click = openCreate
+            )
         },
         floatingActionButtonPosition = FabPosition.End,
         isFloatingActionButtonDocked = true
@@ -55,58 +54,58 @@ fun DetailScreen(openCreate: () -> Unit) {
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-internal fun SpeedDialFloatingActionButton(openCreate: () -> Unit) {
-    var createState by remember { mutableStateOf(SpeedDial.Idle) }
-    val transition = updateTransition(createState, label = "create")
+internal fun SpeedDialFloatingActionButton(
+    onSubFab1Click: () -> Unit,
+    onSubFab2Click: () -> Unit,
+) {
+    var speedDialState by remember { mutableStateOf(SpeedDial.Idle) }
+    val transition = updateTransition(speedDialState, label = "speed_dial")
 
-    val state = remember {
-        MutableTransitionState(false).apply {
-            targetState = true
+    Box(contentAlignment = Alignment.Center) {
+        FloatingActionButton(
+            onClick = {
+                speedDialState = if (speedDialState == SpeedDial.Active) SpeedDial.Idle else SpeedDial.Active
+            },
+        ) {
+            val mainFabRes = if (transition.targetState == SpeedDial.Active) {
+                R.drawable.ic_baseline_close_24
+            } else {
+                R.drawable.ic_baseline_create_24
+            }
+            Icon(
+                painter = painterResource(id = mainFabRes),
+                contentDescription = null
+            )
         }
-    }
-    AnimatedVisibility(
-        visibleState = state,
-        enter = scaleIn(),
-        exit = scaleOut()
-    ) {
-        Box(contentAlignment = Alignment.Center) {
+        if (transition.targetState == SpeedDial.Active) {
             FloatingActionButton(
-                onClick = {
-                    createState =
-                        if (createState == SpeedDial.Active) SpeedDial.Idle else SpeedDial.Active
-                },
+                onClick = onSubFab1Click,
+                modifier = Modifier
+                    .size(MIN_FAB_SIZE)
+                    .offset(y = -FIRST_SUB_FAB_OFFSET_Y)
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_create_24),
+                    painter = painterResource(id = R.drawable.ic_baseline_exposure_plus_1_24),
                     contentDescription = null
                 )
             }
-            if (transition.targetState == SpeedDial.Active) {
-                FloatingActionButton(
-                    onClick = { /* action */ },
-                    modifier = Modifier
-                        .size(MIN_FAB_SIZE)
-                        .offset(y = -FIRST_SUB_FAB_OFFSET_Y)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_exposure_plus_1_24),
-                        contentDescription = null
-                    )
-                }
-                FloatingActionButton(
-                    onClick = { /* action */ },
-                    modifier = Modifier
-                        .size(MIN_FAB_SIZE)
-                        .offset(y = -SECOND_SUB_FAB_OFFSET_Y)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_exposure_plus_2_24),
-                        contentDescription = null
-                    )
-                }
+            FloatingActionButton(
+                onClick = onSubFab2Click,
+                modifier = Modifier
+                    .size(MIN_FAB_SIZE)
+                    .offset(y = -SECOND_SUB_FAB_OFFSET_Y)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_exposure_plus_2_24),
+                    contentDescription = null
+                )
             }
         }
     }
+}
+
+enum class SpeedDial {
+    Active, Idle
 }
 
 // ref: https://material.io/components/buttons-floating-action-button#specs
@@ -115,7 +114,3 @@ val MIN_FAB_SIZE = 40.dp
 
 val FIRST_SUB_FAB_OFFSET_Y = REGULAR_FAB_SIZE + 8.dp
 val SECOND_SUB_FAB_OFFSET_Y = FIRST_SUB_FAB_OFFSET_Y + MIN_FAB_SIZE + 16.dp
-
-enum class SpeedDial {
-    Active, Idle
-}
