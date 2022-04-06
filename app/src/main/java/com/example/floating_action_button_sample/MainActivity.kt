@@ -35,11 +35,13 @@ class MainActivity : ComponentActivity() {
                                 openDetail = { navController.navigate("detail") }
                             )
                         }
+                        composable("detail") {
+                            DetailScreen(
+                                openCreate = { navController.navigate("create") }
+                            )
+                        }
                         composable("create") {
                             CreateScreen()
-                        }
-                        composable("detail") {
-                            DetailScreen()
                         }
                     }
                 }

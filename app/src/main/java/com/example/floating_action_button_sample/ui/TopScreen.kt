@@ -20,7 +20,7 @@ import com.example.floating_action_button_sample.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun TopScreen(openCreate: () -> Unit, openDetail: () -> Unit) {
+fun TopScreen(openDetail: () -> Unit, openCreate: () -> Unit) {
     Scaffold(
         bottomBar = {
             BottomAppBar(
