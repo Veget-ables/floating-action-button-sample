@@ -1,6 +1,9 @@
 package com.example.floating_action_button_sample.ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
@@ -39,7 +42,11 @@ internal fun ThumbUpSpeedDialFloatingActionButton(
                 contentDescription = null
             )
         }
-        if (state == SpeedDialState.Active) {
+        AnimatedVisibility(
+            visible = state == SpeedDialState.Active,
+            enter = scaleIn(),
+            exit = scaleOut()
+        ) {
             Plus1SubFab(onClick = onSubFab1Click)
             Plus2SubFab(onClick = onSubFab2Click)
         }
