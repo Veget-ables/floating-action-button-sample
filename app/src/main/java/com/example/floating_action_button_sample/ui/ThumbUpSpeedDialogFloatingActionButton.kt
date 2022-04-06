@@ -1,7 +1,6 @@
 package com.example.floating_action_button_sample.ui
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
@@ -22,8 +21,6 @@ internal fun ThumbUpSpeedDialFloatingActionButton(
     onSubFab1Click: () -> Unit,
     onSubFab2Click: () -> Unit,
 ) {
-    val transition = updateTransition(state, label = "speed_dial")
-
     Box(contentAlignment = Alignment.Center) {
         FloatingActionButton(
             onClick = {
@@ -32,7 +29,7 @@ internal fun ThumbUpSpeedDialFloatingActionButton(
                 onStateChange(newState)
             },
         ) {
-            val mainFabRes = if (transition.targetState == SpeedDialState.Active) {
+            val mainFabRes = if (state == SpeedDialState.Active) {
                 R.drawable.ic_baseline_close_24
             } else {
                 R.drawable.ic_baseline_thumb_up_off_alt_24
@@ -42,7 +39,7 @@ internal fun ThumbUpSpeedDialFloatingActionButton(
                 contentDescription = null
             )
         }
-        if (transition.targetState == SpeedDialState.Active) {
+        if (state == SpeedDialState.Active) {
             Plus1SubFab(onClick = onSubFab1Click)
             Plus2SubFab(onClick = onSubFab2Click)
         }
