@@ -44,8 +44,8 @@ fun DetailScreen() {
             ThumbUpSpeedDialFloatingActionButton(
                 state = speedDialState,
                 onStateChange = { state -> speedDialState = state },
-                onSubFab1Click = {},
-                onSubFab2Click = {}
+                onSubFab1Click = { /* Action */ },
+                onSubFab2Click = { /* Action */ }
             )
         },
         floatingActionButtonPosition = FabPosition.End,
