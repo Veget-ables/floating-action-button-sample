@@ -10,6 +10,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.floating_action_button_sample.ui.CreateScreen
+import com.example.floating_action_button_sample.ui.DetailScreen
+import com.example.floating_action_button_sample.ui.TopScreen
 import com.example.floating_action_button_sample.ui.theme.FloatingactionbuttonsampleTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,27 +23,27 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FloatingactionbuttonsampleTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    val navController = rememberNavController()
+                    NavHost(navController = navController, startDestination = "top") {
+                        composable("top") {
+                            TopScreen(
+                                openCreate = { navController.navigate("create") },
+                                openDetail = { navController.navigate("detail") }
+                            )
+                        }
+                        composable("create") {
+                            CreateScreen()
+                        }
+                        composable("detail") {
+                            DetailScreen()
+                        }
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    FloatingactionbuttonsampleTheme {
-        Greeting("Android")
     }
 }
