@@ -81,8 +81,7 @@ private fun ThumbUpSpeedDialFloatingActionButton(
     Box(contentAlignment = Alignment.Center) {
         FloatingActionButton(
             onClick = {
-                val newState =
-                    if (state == SpeedDialState.Active) SpeedDialState.Idle else SpeedDialState.Active
+                val newState = if (state == SpeedDialState.Active) SpeedDialState.Idle else SpeedDialState.Active
                 onStateChange(newState)
             },
         ) {
@@ -97,29 +96,39 @@ private fun ThumbUpSpeedDialFloatingActionButton(
             )
         }
         if (transition.targetState == SpeedDialState.Active) {
-            FloatingActionButton(
-                onClick = onSubFab1Click,
-                modifier = Modifier
-                    .size(MIN_FAB_SIZE)
-                    .offset(y = -FIRST_SUB_FAB_OFFSET_Y)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_exposure_plus_1_24),
-                    contentDescription = null
-                )
-            }
-            FloatingActionButton(
-                onClick = onSubFab2Click,
-                modifier = Modifier
-                    .size(MIN_FAB_SIZE)
-                    .offset(y = -SECOND_SUB_FAB_OFFSET_Y)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_exposure_plus_2_24),
-                    contentDescription = null
-                )
-            }
+            Plus1SubFab(onClick = onSubFab1Click)
+            Plus2SubFab(onClick = onSubFab2Click)
         }
+    }
+}
+
+@Composable
+private fun Plus1SubFab(onClick: () ->Unit) {
+    FloatingActionButton(
+        onClick = onClick,
+        modifier = Modifier
+            .size(MIN_FAB_SIZE)
+            .offset(y = -FIRST_SUB_FAB_OFFSET_Y)
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_baseline_exposure_plus_1_24),
+            contentDescription = null
+        )
+    }
+}
+
+@Composable
+private fun Plus2SubFab(onClick: () -> Unit) {
+    FloatingActionButton(
+        onClick = onClick,
+        modifier = Modifier
+            .size(MIN_FAB_SIZE)
+            .offset(y = -SECOND_SUB_FAB_OFFSET_Y)
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_baseline_exposure_plus_2_24),
+            contentDescription = null
+        )
     }
 }
 
