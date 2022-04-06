@@ -3,6 +3,7 @@ package com.example.floating_action_button_sample.ui
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -17,7 +18,6 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,9 +52,12 @@ fun DetailScreen() {
         isFloatingActionButtonDocked = true
     ) {
         Box(Modifier.fillMaxSize()) {
-            Text(
-                text = "Detail Screen",
-                modifier = Modifier.align(Alignment.Center)
+            Image(
+                painter = painterResource(R.drawable.background),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(400.dp)
+                    .align(Alignment.Center)
             )
 
             if (speedDialState == SpeedDialState.Active) {
@@ -81,7 +84,8 @@ private fun ThumbUpSpeedDialFloatingActionButton(
     Box(contentAlignment = Alignment.Center) {
         FloatingActionButton(
             onClick = {
-                val newState = if (state == SpeedDialState.Active) SpeedDialState.Idle else SpeedDialState.Active
+                val newState =
+                    if (state == SpeedDialState.Active) SpeedDialState.Idle else SpeedDialState.Active
                 onStateChange(newState)
             },
         ) {
@@ -103,7 +107,7 @@ private fun ThumbUpSpeedDialFloatingActionButton(
 }
 
 @Composable
-private fun Plus1SubFab(onClick: () ->Unit) {
+private fun Plus1SubFab(onClick: () -> Unit) {
     FloatingActionButton(
         onClick = onClick,
         modifier = Modifier
