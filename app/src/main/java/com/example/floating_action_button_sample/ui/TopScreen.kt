@@ -24,7 +24,7 @@ fun TopScreen(openDetail: () -> Unit, openCreate: () -> Unit) {
             ) {}
         },
         floatingActionButton = {
-            CreateFloatingActionButton(openCreate)
+            SpeedDialFloatingActionButton(openCreate)
         },
         floatingActionButtonPosition = FabPosition.Center,
         isFloatingActionButtonDocked = true
