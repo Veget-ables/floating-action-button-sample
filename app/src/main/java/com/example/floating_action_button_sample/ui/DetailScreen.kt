@@ -54,6 +54,7 @@ fun DetailScreen() {
                     .align(Alignment.Center)
             )
 
+            // SpeedDialState.Activeならコンテンツにぼかしを入れてFABが目立つようにする
             if (speedDialState == SpeedDialState.Active) {
                 Spacer(
                     modifier = Modifier
