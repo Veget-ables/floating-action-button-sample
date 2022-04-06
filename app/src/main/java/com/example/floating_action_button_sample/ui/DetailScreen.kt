@@ -10,6 +10,7 @@ import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.FabPosition
@@ -68,39 +69,52 @@ internal fun SpeedDialFloatingActionButton(openCreate: () -> Unit) {
         enter = scaleIn(),
         exit = scaleOut()
     ) {
-        if (transition.targetState == SpeedDial.Active) {
+        Box(contentAlignment = Alignment.Center) {
             FloatingActionButton(
                 onClick = {
+                    createState =
+                        if (createState == SpeedDial.Active) SpeedDial.Idle else SpeedDial.Active
                 },
-                modifier = Modifier.offset(y = (-160).dp)
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_exposure_plus_1_24),
+                    painter = painterResource(id = R.drawable.ic_baseline_create_24),
                     contentDescription = null
                 )
             }
-            FloatingActionButton(
-                onClick = { /*TODO*/ },
-                modifier = Modifier.offset(y = (-80).dp)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_exposure_plus_2_24),
-                    contentDescription = null
-                )
+            if (transition.targetState == SpeedDial.Active) {
+                FloatingActionButton(
+                    onClick = { /* action */ },
+                    modifier = Modifier
+                        .size(MIN_FAB_SIZE)
+                        .offset(y = -FIRST_SUB_FAB_OFFSET_Y)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_baseline_exposure_plus_1_24),
+                        contentDescription = null
+                    )
+                }
+                FloatingActionButton(
+                    onClick = { /* action */ },
+                    modifier = Modifier
+                        .size(MIN_FAB_SIZE)
+                        .offset(y = -SECOND_SUB_FAB_OFFSET_Y)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_baseline_exposure_plus_2_24),
+                        contentDescription = null
+                    )
+                }
             }
-        }
-        FloatingActionButton(
-            onClick = {
-                createState = if (createState == SpeedDial.Active) SpeedDial.Idle else SpeedDial.Active
-            },
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_baseline_create_24),
-                contentDescription = null
-            )
         }
     }
 }
+
+// ref: https://material.io/components/buttons-floating-action-button#specs
+val REGULAR_FAB_SIZE = 56.dp
+val MIN_FAB_SIZE = 40.dp
+
+val FIRST_SUB_FAB_OFFSET_Y = REGULAR_FAB_SIZE + 8.dp
+val SECOND_SUB_FAB_OFFSET_Y = FIRST_SUB_FAB_OFFSET_Y + MIN_FAB_SIZE + 16.dp
 
 enum class SpeedDial {
     Active, Idle
