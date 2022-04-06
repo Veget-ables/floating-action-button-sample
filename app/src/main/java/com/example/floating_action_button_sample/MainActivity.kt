@@ -36,9 +36,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable("detail") {
-                            DetailScreen(
-                                openCreate = { navController.navigate("create") }
-                            )
+                            DetailScreen()
                         }
                         composable("create") {
                             CreateScreen()

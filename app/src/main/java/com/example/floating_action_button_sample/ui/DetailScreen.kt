@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.example.floating_action_button_sample.R
 
 @Composable
-fun DetailScreen(openCreate: () -> Unit) {
+fun DetailScreen() {
     Scaffold(
         bottomBar = {
             BottomAppBar(
@@ -35,9 +35,9 @@ fun DetailScreen(openCreate: () -> Unit) {
             ) {}
         },
         floatingActionButton = {
-            SpeedDialFloatingActionButton(
-                onSubFab1Click = openCreate,
-                onSubFab2Click = openCreate
+            ThumbUpSpeedDialFloatingActionButton(
+                onSubFab1Click = {},
+                onSubFab2Click = {}
             )
         },
         floatingActionButtonPosition = FabPosition.End,
@@ -54,7 +54,7 @@ fun DetailScreen(openCreate: () -> Unit) {
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-internal fun SpeedDialFloatingActionButton(
+private fun ThumbUpSpeedDialFloatingActionButton(
     onSubFab1Click: () -> Unit,
     onSubFab2Click: () -> Unit,
 ) {
@@ -70,7 +70,7 @@ internal fun SpeedDialFloatingActionButton(
             val mainFabRes = if (transition.targetState == SpeedDial.Active) {
                 R.drawable.ic_baseline_close_24
             } else {
-                R.drawable.ic_baseline_create_24
+                R.drawable.ic_baseline_thumb_up_off_alt_24
             }
             Icon(
                 painter = painterResource(id = mainFabRes),
