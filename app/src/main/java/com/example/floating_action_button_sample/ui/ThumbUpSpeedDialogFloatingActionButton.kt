@@ -42,6 +42,8 @@ internal fun ThumbUpSpeedDialFloatingActionButton(
                 contentDescription = null
             )
         }
+
+        // SpeedDialState.ActiveのときはVisibleでIdle時はInvisibleになるので、条件分岐が必要ない
         AnimatedVisibility(
             visible = state == SpeedDialState.Active,
             enter = scaleIn(),
