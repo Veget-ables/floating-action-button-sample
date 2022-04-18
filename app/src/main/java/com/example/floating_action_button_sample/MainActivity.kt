@@ -11,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.floating_action_button_sample.ui.CreateScreen
-import com.example.floating_action_button_sample.ui.FavoriteAnimationSampleScreen
+import com.example.floating_action_button_sample.ui.favorite.FavoriteAnimationSampleScreen
 import com.example.floating_action_button_sample.ui.SpeedDialSampleScreen
 import com.example.floating_action_button_sample.ui.TopScreen
 import com.example.floating_action_button_sample.ui.theme.FloatingactionbuttonsampleTheme

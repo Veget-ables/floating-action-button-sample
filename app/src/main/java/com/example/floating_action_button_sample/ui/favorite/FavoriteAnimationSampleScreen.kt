@@ -1,4 +1,4 @@
-package com.example.floating_action_button_sample.ui
+package com.example.floating_action_button_sample.ui.favorite
 
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.layout.Box
@@ -13,8 +13,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
-import com.example.floating_action_button_sample.ui.favorite.FavoriteFloatingActionButton
-import com.example.floating_action_button_sample.ui.favorite.FavoriteState
 
 
 @Composable
