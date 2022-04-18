@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.floating_action_button_sample.ui.CreateScreen
+import com.example.floating_action_button_sample.ui.FavoriteAnimationSampleScreen
 import com.example.floating_action_button_sample.ui.SpeedDialSampleScreen
 import com.example.floating_action_button_sample.ui.TopScreen
 import com.example.floating_action_button_sample.ui.theme.FloatingactionbuttonsampleTheme
@@ -28,9 +29,13 @@ class MainActivity : ComponentActivity() {
                     NavHost(navController = navController, startDestination = "top") {
                         composable("top") {
                             TopScreen(
-                                openCreate = { navController.navigate("create") },
-                                openSpeedDial = { navController.navigate("speed_dial_sample") }
+                                openFavoriteAnimation = { navController.navigate("favorite_animation_sample") },
+                                openSpeedDial = { navController.navigate("speed_dial_sample") },
+                                openCreate = { navController.navigate("create") }
                             )
+                        }
+                        composable("favorite_animation_sample") {
+                            FavoriteAnimationSampleScreen()
                         }
                         composable("speed_dial_sample") {
                             SpeedDialSampleScreen()

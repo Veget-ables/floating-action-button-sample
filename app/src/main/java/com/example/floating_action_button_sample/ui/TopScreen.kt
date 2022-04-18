@@ -1,6 +1,7 @@
 package com.example.floating_action_button_sample.ui
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.BottomAppBar
@@ -20,7 +21,11 @@ import com.example.floating_action_button_sample.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun TopScreen(openSpeedDial: () -> Unit, openCreate: () -> Unit) {
+fun TopScreen(
+    openFavoriteAnimation: () -> Unit,
+    openSpeedDial: () -> Unit,
+    openCreate: () -> Unit
+) {
     Scaffold(
         bottomBar = {
             BottomAppBar(
@@ -40,9 +45,18 @@ fun TopScreen(openSpeedDial: () -> Unit, openCreate: () -> Unit) {
         floatingActionButtonPosition = FabPosition.Center,
         isFloatingActionButtonDocked = true
     ) {
-        Box(Modifier.fillMaxSize()) {
+        Column(
+            Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
             Button(
-                modifier = Modifier.align(Alignment.Center),
+                onClick = openFavoriteAnimation
+            ) {
+                Text(text = "Favorite animation sample")
+            }
+
+            Button(
                 onClick = openSpeedDial
             ) {
                 Text(text = "Speed dial sample")
