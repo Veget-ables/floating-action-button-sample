@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.example.floating_action_button_sample.R
 
 @Composable
-fun DetailScreen() {
+fun SpeedDialSampleScreen() {
     var speedDialState by remember { mutableStateOf(SpeedDialState.Idle) }
 
     Scaffold(

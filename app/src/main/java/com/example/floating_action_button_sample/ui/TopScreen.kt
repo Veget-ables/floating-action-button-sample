@@ -20,7 +20,7 @@ import com.example.floating_action_button_sample.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun TopScreen(openDetail: () -> Unit, openCreate: () -> Unit) {
+fun TopScreen(openSpeedDial: () -> Unit, openCreate: () -> Unit) {
     Scaffold(
         bottomBar = {
             BottomAppBar(
@@ -43,9 +43,9 @@ fun TopScreen(openDetail: () -> Unit, openCreate: () -> Unit) {
         Box(Modifier.fillMaxSize()) {
             Button(
                 modifier = Modifier.align(Alignment.Center),
-                onClick = openDetail
+                onClick = openSpeedDial
             ) {
-                Text(text = "Go to Detail")
+                Text(text = "Speed dial sample")
             }
         }
     }

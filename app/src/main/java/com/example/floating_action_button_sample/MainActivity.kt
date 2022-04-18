@@ -6,15 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.floating_action_button_sample.ui.CreateScreen
-import com.example.floating_action_button_sample.ui.DetailScreen
+import com.example.floating_action_button_sample.ui.SpeedDialSampleScreen
 import com.example.floating_action_button_sample.ui.TopScreen
 import com.example.floating_action_button_sample.ui.theme.FloatingactionbuttonsampleTheme
 
@@ -32,11 +29,11 @@ class MainActivity : ComponentActivity() {
                         composable("top") {
                             TopScreen(
                                 openCreate = { navController.navigate("create") },
-                                openDetail = { navController.navigate("detail") }
+                                openSpeedDial = { navController.navigate("speed_dial_sample") }
                             )
                         }
-                        composable("detail") {
-                            DetailScreen()
+                        composable("speed_dial_sample") {
+                            SpeedDialSampleScreen()
                         }
                         composable("create") {
                             CreateScreen()
